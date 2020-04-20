@@ -1,0 +1,16 @@
+doctype html
+html(lang='ko')
+    head
+        title Simple Chat Server
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no')
+        style
+            include /views/static/css/global.css
+            include /views/static/css/home.css
+    body
+        #wrapper
+            h1#title Simple Chat Server
+            a#repo(href='https://github.com/delta-kor/simple-chat-server' target='_blank') delta-kor
+            #button-wrapper
+                button#sign-in.button sign in
+                button#sign-up.button sign up

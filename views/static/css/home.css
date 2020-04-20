@@ -1,0 +1,26 @@
+#wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+#title, #repo {
+    display: inline-block;
+    text-decoration: none;
+}
+
+#title {
+    margin-right: 15px;
+}
+
+#repo, #repo:hover, #repo:visited, #repo:focus {
+    color: var(--primary);
+}
+
+#sign-in, #sign-up {
+    display: inline-block;
+    width: 150px;
+}
+
+#sign-in {
+    margin-right: 15px;
+}

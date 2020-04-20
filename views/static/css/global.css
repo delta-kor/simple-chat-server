@@ -1,0 +1,28 @@
+:root {
+    --transition: 100ms ease;
+    --white: #ffffff;
+    --primary: #3776ff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.button {
+    background: var(--white);
+    border: var(--primary) solid 2px;
+    border-radius: 7px;
+    color: var(--primary);
+    cursor: pointer;
+    font-size: 18px;
+    outline: none;
+    padding: 7px 14px;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.button:hover {
+    background: var(--primary);
+    color: var(--white);
+}

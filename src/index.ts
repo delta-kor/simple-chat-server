@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import Route from './route';
+import {Database} from './database';
 
 class Server {
 
@@ -23,6 +24,12 @@ class Server {
         return this;
     }
 
+    loadDatabase(): Server {
+        console.log('Loading Database...');
+        Database.init();
+        return this;
+    }
+
     mountMiddleware(): Server {
         console.log('Mounting Middleware...');
 
@@ -41,6 +48,7 @@ class Server {
 
 const server = new Server();
 server.loadConfiguration();
+server.loadDatabase();
 server.mountMiddleware();
 server.mountRoutes();
 

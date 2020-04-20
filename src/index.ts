@@ -1,4 +1,3 @@
-import * as path from 'path';
 import * as dotenv from 'dotenv';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
@@ -26,6 +25,8 @@ class Server {
 
     mountMiddleware(): Server {
         console.log('Mounting Middleware...');
+
+        this.application.set('view engine', 'pug');
         this.application.use(bodyParser.json());
         this.application.use(bodyParser.urlencoded({ extended: true }));
         return this;

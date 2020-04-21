@@ -17,10 +17,10 @@ class Crypto {
         return buffer.toString('base64');
     }
 
-    static decodeBase64(query: string | Buffer): string {
+    static decodeBase64(query: string | Buffer, returnBuffer: boolean = false): string | Buffer {
         let buffer = query;
         if(typeof query === 'string') buffer = Buffer.from(query, 'base64');
-        return buffer.toString('utf8');
+        return returnBuffer ? buffer : buffer.toString('utf8');
     }
 
     static async generateRSA(): Promise<RSAKeyPair> {
@@ -42,6 +42,13 @@ class Crypto {
         });
     }
 
+    static decryptRSA(privateKey: string, encodedEncryted: string): string {
+        const encrypted = this.decodeBase64(encodedEncryted, true);
+        if(!(encrypted instanceof Buffer)) return null;
+        return crypto.privateDecrypt(privateKey, encrypted).toString('utf8');
+    }
+
 }
 
 export default Crypto;
+export {RSAKeyPair};

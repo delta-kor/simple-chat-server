@@ -1,4 +1,4 @@
-import Crypto from './crypto';
+import Crypto, {RSAKeyPair} from './crypto';
 import Security from './security';
 
 interface ServerHelloResponse {
@@ -16,6 +16,11 @@ class Auth {
         return {
             accessKey, public: encodedPublic
         };
+    }
+
+    static serverData(encrypted: string, accessKey: string): string {
+        const keySet: RSAKeyPair = Security.getKey(accessKey).value;
+        return Crypto.decryptRSA(keySet.private, encrypted);
     }
 
 }

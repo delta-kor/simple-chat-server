@@ -1,4 +1,4 @@
-interface Key {
+interface StoreKey {
     key: string;
     value: any;
     expiredAfter: Date | null;
@@ -6,7 +6,7 @@ interface Key {
 
 class Security {
 
-    private keyStore: Key[];
+    private keyStore: StoreKey[];
 
     constructor() {
         this.keyStore = [];
@@ -27,7 +27,7 @@ class Security {
         return this;
     }
 
-    getKey(publicKey: string): Key | null {
+    getKey(publicKey: string): StoreKey | null {
         this.refreshExpired();
         for(let key of this.keyStore) {
             if (key.key === publicKey) return key;
@@ -59,3 +59,4 @@ class Security {
 }
 
 export default new Security();
+export {StoreKey};

@@ -1,7 +1,7 @@
 interface Key {
     key: string;
-    value: string;
-    expiredAfter: Date;
+    value: any;
+    expiredAfter: Date | null;
 }
 
 class Security {
@@ -12,14 +12,14 @@ class Security {
         this.keyStore = [];
     }
 
-    storeKey(publicKey: string, privateValue: string, lifeMin: number | Date = 10): Security {
+    storeKey(publicKey: string, privateValue: any, lifeMin: number | Date = 60): Security {
         this.refreshExpired();
         let lifeMilliSeconds: number;
         if(lifeMin instanceof Date)
             lifeMilliSeconds = lifeMin.getTime();
         else
             lifeMilliSeconds = lifeMin * 60 * 1000;
-        const nowTime = new Date().getTime();
+        const nowTime: number = new Date().getTime();
         const expiredAfter = new Date(nowTime + lifeMilliSeconds);
         this.keyStore.push({
             key: publicKey, value: privateValue, expiredAfter
@@ -35,13 +35,22 @@ class Security {
         return null;
     }
 
+    deleteKey(publicKey: string): Security {
+        let index: number = 0;
+        for(let key of this.keyStore) {
+            if(key.key === publicKey)
+                delete this.keyStore[index];
+            index++;
+        }
+        return this;
+    }
+
     refreshExpired(): Security {
         let index: number = 0;
         const nowTime: number = new Date().getTime();
         for(let key of this.keyStore) {
-            if(key.expiredAfter.getTime() > nowTime) {
+            if(key.expiredAfter.getTime() > nowTime)
                 delete this.keyStore[index];
-            }
             index++;
         }
         return this;

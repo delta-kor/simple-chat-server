@@ -1,7 +1,7 @@
 import {Application} from 'express';
 
-import webRouter from './routes/Web';
-import apiRouter from './routes/Api';
+import webRouter from '../routes/Web';
+import apiRouter from '../routes/Api';
 
 class Route {
 

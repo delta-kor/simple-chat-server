@@ -1,8 +1,8 @@
 import * as dotenv from 'dotenv';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import Route from './route';
-import {Database} from './database';
+import Route from './providers/route';
+import {Database} from './providers/database';
 
 class Server {
 

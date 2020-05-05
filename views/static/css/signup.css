@@ -11,3 +11,8 @@
 input {
     width: 420px;
 }
+
+#submit {
+    margin-top: 24px;
+    width: 240px;
+}

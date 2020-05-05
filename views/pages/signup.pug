@@ -9,7 +9,7 @@ html(lang='ko')
             include /views/static/css/signup.css
     body
         - const publicKey = data.publicKey;
-        input(type='hidden' value=publicKey)
+        input(type='hidden' value=publicKey id='dx_public_key')
         #wrapper
             h1#title Sign up to server
             .input
@@ -28,3 +28,7 @@ html(lang='ko')
                 input(id='c-password' type='password' placeholder='Confirm Password' autocomplete='off' spellcheck='false')
                 label(for='c-password') Confirm Password
             br
+            button#submit.button Submit
+        script(src='./js/cryptojs.js')
+        script(src='./js/jsencrypt.js')
+        script(src='./js/communication.js')

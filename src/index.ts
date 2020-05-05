@@ -2,8 +2,8 @@ import * as dotenv from 'dotenv';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cookieParser from 'cookie-parser';
-import Route from './providers/route';
-import {Database} from './providers/database';
+import Route from './providers/Route';
+import {Database} from './providers/Database';
 
 class Server {
 
@@ -38,6 +38,7 @@ class Server {
         this.application.use(bodyParser.json());
         this.application.use(bodyParser.urlencoded({ extended: true }));
         this.application.use(cookieParser());
+        this.application.use(express.static('views/static'));
         return this;
     }
 

@@ -28,7 +28,7 @@ class Crypto {
             crypto.generateKeyPair('rsa', {
                 modulusLength: 2048,
                 publicKeyEncoding: {
-                    type: 'pkcs1',
+                    type: 'spki',
                     format: 'pem'
                 },
                 privateKeyEncoding: {
@@ -45,7 +45,10 @@ class Crypto {
     static decryptRSA(privateKey: string, encodedEncrypted: string): string {
         const encrypted = this.decodeBase64(encodedEncrypted, true);
         if(!(encrypted instanceof Buffer)) return null;
-        return crypto.privateDecrypt(privateKey, encrypted).toString('utf8');
+        return crypto.privateDecrypt({
+            key: privateKey,
+            padding: crypto.constants.RSA_PKCS1_PADDING
+        }, encrypted).toString('utf8');
     }
 
 }

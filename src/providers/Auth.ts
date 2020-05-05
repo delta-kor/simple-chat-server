@@ -1,9 +1,15 @@
-import Crypto, {RSAKeyPair} from './crypto';
-import Security, {StoreKey} from './security';
+import Crypto, {RSAKeyPair} from './Crypto';
+import Security, {StoreKey} from './Security';
+import * as CryptoJS from 'crypto-js';
 
 export interface ServerHelloResponse {
     accessKey: string;
     public: string;
+}
+
+export interface EncryptedPayload {
+    key: string;
+    data: string;
 }
 
 class Auth {
@@ -27,9 +33,12 @@ class Auth {
         };
     }
 
-    static serverData(encrypted: string, accessKey: string): string {
-        const keySet: RSAKeyPair = Security.getKey(accessKey).value;
-        return Crypto.decryptRSA(keySet.private, encrypted);
+    static serverData(encryptedKey: string, encryptedData: string, accessKey: string): string | null {
+        const accessKeyData: StoreKey | null = Security.getKey(accessKey);
+        if(!accessKeyData) return null;
+        const keySet: RSAKeyPair = accessKeyData.value;
+        const cipher: string = Crypto.decryptRSA(keySet.private, encryptedKey);
+        return CryptoJS.AES.decrypt(encryptedData, cipher).toString(CryptoJS.enc.Utf8);
     }
 
 }

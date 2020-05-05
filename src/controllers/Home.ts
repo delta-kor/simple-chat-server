@@ -1,6 +1,6 @@
 import * as path from 'path';
 import {Request, Response} from 'express';
-import Auth, {ServerHelloResponse} from '../providers/auth';
+import Auth, {ServerHelloResponse} from '../providers/Auth';
 
 export default class Home {
 

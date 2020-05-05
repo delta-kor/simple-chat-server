@@ -1,5 +1,5 @@
-import crypto from 'crypto';
-import cryptoRandom from 'crypto-random-string';
+import * as crypto from 'crypto';
+import * as cryptoRandom from 'crypto-random-string';
 
 interface RSAKeyPair {
     public: string;
@@ -9,7 +9,7 @@ interface RSAKeyPair {
 class Crypto {
 
     static randomKey(length: number): string {
-        return cryptoRandom({length, type: 'base64'})
+        return cryptoRandom({length, type: 'hex'})
     }
 
     static encodeBase64(query: string): string {
@@ -26,7 +26,7 @@ class Crypto {
     static async generateRSA(): Promise<RSAKeyPair> {
         return new Promise<RSAKeyPair>((resolve) => {
             crypto.generateKeyPair('rsa', {
-                modulusLength: 4096,
+                modulusLength: 2048,
                 publicKeyEncoding: {
                     type: 'pkcs1',
                     format: 'pem'
@@ -42,8 +42,8 @@ class Crypto {
         });
     }
 
-    static decryptRSA(privateKey: string, encodedEncryted: string): string {
-        const encrypted = this.decodeBase64(encodedEncryted, true);
+    static decryptRSA(privateKey: string, encodedEncrypted: string): string {
+        const encrypted = this.decodeBase64(encodedEncrypted, true);
         if(!(encrypted instanceof Buffer)) return null;
         return crypto.privateDecrypt(privateKey, encrypted).toString('utf8');
     }

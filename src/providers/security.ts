@@ -29,9 +29,8 @@ class Security {
 
     getKey(publicKey: string): StoreKey | null {
         this.refreshExpired();
-        for(let key of this.keyStore) {
+        for(let key of this.keyStore)
             if (key.key === publicKey) return key;
-        }
         return null;
     }
 
@@ -49,8 +48,8 @@ class Security {
         let index: number = 0;
         const nowTime: number = new Date().getTime();
         for(let key of this.keyStore) {
-            if(key.expiredAfter.getTime() > nowTime)
-                delete this.keyStore[index];
+            if(key.expiredAfter.getTime() < nowTime)
+                this.keyStore.splice(index, 1);
             index++;
         }
         return this;

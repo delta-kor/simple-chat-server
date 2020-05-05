@@ -26,3 +26,65 @@ body {
     background: var(--primary);
     color: var(--white);
 }
+
+input {
+    position: relative;
+    display: block;
+    border-radius: 5px;
+    background: rgba(109, 124, 144, 0.1);
+    width: 100%;
+    margin: 16px 0;
+    padding: 8px 12px;
+    text-align: left;
+    border: 2px solid transparent;
+    transition: 300ms all cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.9em;
+    font-family: "Montserrat", "Noto Sans KR", sans-serif;
+    line-height: 1.8em;
+    letter-spacing: 1px;
+    font-weight: 700;
+    color: #2e303e;
+    outline: none;
+    box-sizing: border-box;
+}
+
+input:hover {
+    border: 2px solid #0072ff;
+}
+
+input:focus {
+    border: 2px solid #0072ff;
+    background: transparent;
+}
+
+label {
+    text-align: left;
+    font-size: 10px;
+    line-height: 1.2em;
+    font-weight: 300;
+    font-family: "Montserrat", "Noto Sans KR", sans-serif !important;
+    letter-spacing: 1px;
+    position: absolute;
+    top: -0.2em;
+    left: 0;
+    pointer-events: none;
+    transition: all 0.4s;
+    opacity: 0;
+    color: rgba(109, 124, 144, 0.6)
+}
+
+input:focus+label {
+    opacity: 1;
+    top: -0.2em;
+    color: #0072ff;
+}
+
+input:focus::-webkit-input-placeholder, textarea:focus::-webkit-input-placeholder {
+    color:transparent;
+}
+
+input ::selection {
+    color: #ffffff;
+    text-shadow: none;
+    background: #0072ff !important;
+}

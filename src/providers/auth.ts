@@ -1,18 +1,27 @@
 import Crypto, {RSAKeyPair} from './crypto';
-import Security from './security';
+import Security, {StoreKey} from './security';
 
-interface ServerHelloResponse {
+export interface ServerHelloResponse {
     accessKey: string;
     public: string;
 }
 
 class Auth {
 
-    static async serverHello(): Promise<ServerHelloResponse> {
-        const keySet = await Crypto.generateRSA();
-        const accessKey = Crypto.randomKey(10);
+    static async serverHello(preAccessKey?: string): Promise<ServerHelloResponse> {
+        if(preAccessKey) {
+            const keyStore: StoreKey = Security.getKey(preAccessKey);
+            if(keyStore) {
+                return {
+                    accessKey: preAccessKey,
+                    public: Crypto.encodeBase64(keyStore.value.public)
+                }
+            }
+        }
+        const keySet: RSAKeyPair = await Crypto.generateRSA();
+        const accessKey: string = Crypto.randomKey(10);
         Security.storeKey(accessKey, keySet);
-        const encodedPublic = Crypto.encodeBase64(keySet.public);
+        const encodedPublic: string = Crypto.encodeBase64(keySet.public);
         return {
             accessKey, public: encodedPublic
         };

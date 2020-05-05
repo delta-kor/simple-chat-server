@@ -1,0 +1,13 @@
+#wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+.input {
+    display: inline-block;
+    position: relative;
+}
+
+input {
+    width: 420px;
+}

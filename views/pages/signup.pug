@@ -13,22 +13,24 @@ html(lang='ko')
         #wrapper
             h1#title Sign up to server
             .input
-                input(id='nickname' type='text' placeholder='Nickname' autocomplete='off' spellcheck='false')
+                input#nickname(type='text' placeholder='Nickname' autocomplete='off' spellcheck='false')
                 label(for='nickname') Nickname
             br
             .input
-                input(id='email' type='email' placeholder='Email' autocomplete='off' spellcheck='false')
-                label(for='nickname') Email
+                input#email(type='email' placeholder='Email' autocomplete='off' spellcheck='false')
+                label(for='email') Email
             br
             .input
-                input(id='password' type='password' placeholder='Password' autocomplete='off' spellcheck='false')
+                input#password(type='password' placeholder='Password' autocomplete='off' spellcheck='false')
                 label(for='password') Password
             br
             .input
-                input(id='c-password' type='password' placeholder='Confirm Password' autocomplete='off' spellcheck='false')
-                label(for='c-password') Confirm Password
+                input#c_password(type='password' placeholder='Confirm Password' autocomplete='off' spellcheck='false')
+                label(for='c_password') Confirm Password
             br
             button#submit.button Submit
+            #prompt_wrapper.prompt_wrapper
         script(src='./js/cryptojs.js')
         script(src='./js/jsencrypt.js')
         script(src='./js/communication.js')
+        script(src='./js/signup.js' type='module')

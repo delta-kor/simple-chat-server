@@ -2,6 +2,8 @@
     --transition: 100ms ease;
     --white: #ffffff;
     --primary: #3776ff;
+    --secondary: #ff3776;
+    --secondary-l: #ffd5e2;
 }
 
 body {
@@ -87,4 +89,28 @@ input ::selection {
     color: #ffffff;
     text-shadow: none;
     background: #0072ff !important;
+}
+
+.prompt_wrapper .item:first-child {
+}
+
+.prompt_wrapper .item {
+    display: inline-block;
+    width: 420px;
+    text-align: left;
+    padding: 4px 16px;
+    margin-top: 24px;
+    border: 2px solid var(--secondary);
+    background-color: var(--secondary-l);
+    border-radius: 7px;
+    box-sizing: border-box;
+}
+
+.prompt_wrapper .item .header {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.prompt_wrapper .item .content {
+    margin: 16px 0;
 }

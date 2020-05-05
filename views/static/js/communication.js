@@ -9,7 +9,7 @@ class Communication {
         encrypter.setPublicKey(publicKey);
         const encryptedKey = encrypter.encrypt(cipherKey);
         const encryptedData = CryptoJS.AES.encrypt(data, cipherKey).toString();
-        await fetch(target, {
+        return await fetch(target, {
             method: 'POST',
             body: JSON.stringify({
                 key: encryptedKey,

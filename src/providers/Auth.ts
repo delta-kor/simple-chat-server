@@ -25,7 +25,7 @@ class Auth {
             }
         }
         const keySet: RSAKeyPair = await Crypto.generateRSA();
-        const accessKey: string = Crypto.randomKey(10);
+        const accessKey: string = Crypto.randomKey(32);
         Security.storeKey(accessKey, keySet);
         const encodedPublic: string = Crypto.encodeBase64(keySet.public);
         return {

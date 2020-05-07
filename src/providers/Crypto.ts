@@ -23,8 +23,24 @@ class Crypto {
         return returnBuffer ? buffer : buffer.toString('utf8');
     }
 
+    static async hash(query: string, salt?: string): Promise<string> {
+        if(salt)
+            return new Promise<string>((resolve, reject) => {
+                crypto.scrypt(query, salt, 128, (error, key) => {
+                    if(error) {
+                        reject(error);
+                        return false;
+                    }
+                    resolve(key.toString('hex'));
+                });
+            });
+        return new Promise<string>((resolve, reject) => {
+            resolve(crypto.createHash('sha512').update(query).digest('hex'));
+        });
+    }
+
     static async generateRSA(): Promise<RSAKeyPair> {
-        return new Promise<RSAKeyPair>((resolve) => {
+        return new Promise<RSAKeyPair>((resolve, reject) => {
             crypto.generateKeyPair('rsa', {
                 modulusLength: 2048,
                 publicKeyEncoding: {
@@ -35,7 +51,11 @@ class Crypto {
                     type: 'pkcs8',
                     format: 'pem'
                 }
-            }, (err, publicKey, privateKey) => {
+            }, (error, publicKey, privateKey) => {
+                if(error) {
+                    reject(error);
+                    return false;
+                }
                 const keyPair: RSAKeyPair = {public: publicKey, private: privateKey};
                 resolve(keyPair);
             });

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/earlyaccess/notosanskr.css");
+
 :root {
     --transition: 100ms ease;
     --white: #ffffff;
@@ -14,6 +16,7 @@ body {
 .button {
     background: var(--white);
     border: var(--primary) solid 2px;
+    font-family: "Noto Sans KR", sans-serif;
     border-radius: 7px;
     color: var(--primary);
     cursor: pointer;
@@ -41,10 +44,10 @@ input {
     border: 2px solid transparent;
     transition: 300ms all cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 0.9em;
-    font-family: "Montserrat", "Noto Sans KR", sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
     line-height: 1.8em;
     letter-spacing: 1px;
-    font-weight: 700;
+    font-weight: 500;
     color: #2e303e;
     outline: none;
     box-sizing: border-box;
@@ -64,7 +67,7 @@ label {
     font-size: 10px;
     line-height: 1.2em;
     font-weight: 300;
-    font-family: "Montserrat", "Noto Sans KR", sans-serif !important;
+    font-family: "Noto Sans KR", sans-serif !important;
     letter-spacing: 1px;
     position: absolute;
     top: -0.2em;
@@ -91,9 +94,6 @@ input ::selection {
     background: #0072ff !important;
 }
 
-.prompt_wrapper .item:first-child {
-}
-
 .prompt_wrapper .item {
     display: inline-block;
     width: 420px;
@@ -113,4 +113,13 @@ input ::selection {
 
 .prompt_wrapper .item .content {
     margin: 16px 0;
+}
+
+#back {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    user-select: none;
 }

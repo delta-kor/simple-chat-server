@@ -38,7 +38,7 @@ class Security {
         let index: number = 0;
         for(let key of this.keyStore) {
             if(key.key === publicKey)
-                delete this.keyStore[index];
+                this.keyStore.splice(index, 1);
             index++;
         }
         return this;

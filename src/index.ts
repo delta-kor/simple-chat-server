@@ -25,9 +25,9 @@ class Server {
         return this;
     }
 
-    loadDatabase(): Server {
+    async loadDatabase(): Promise<Server> {
         console.log('Loading Database...');
-        Database.init();
+        await Database.init();
         return this;
     }
 
@@ -50,10 +50,12 @@ class Server {
 }
 
 const server = new Server();
-server.loadConfiguration();
-server.loadDatabase();
-server.mountMiddleware();
-server.mountRoutes();
+(async () => {
+    server.loadConfiguration();
+    await server.loadDatabase();
+    server.mountMiddleware();
+    server.mountRoutes();
 
-const port = parseInt(process.env.PORT);
-server.start(port, () => console.log(`App listening on port ${port}. Good Luck!`));
+    const port = parseInt(process.env.PORT);
+    server.start(port, () => console.log(`App listening on port ${port}. Good Luck!`));
+})();
